@@ -1,0 +1,58 @@
+<div class="w-75 mx-auto py-4">
+    <h4>register now</h4>
+    <div *ngIf="apiError" class="alert alert-danger">
+        {{apiError}}
+    </div>
+    <form (ngSubmit)="handleRegister(registerForm)" [formGroup]="registerForm" action="">
+     <h2>{{registerForm.get('name')?.getError('minlength')|json}}</h2>
+        <label for="name">name</label>
+        <input formControlName="name" type="text" class="form-control mb-2" id="name">
+<div *ngIf="registerForm.get('name')?.errors &&registerForm.get('name')?.touched " class="alert alert-danger">
+    <p *ngIf="registerForm.get('name')?.getError('minlength')|json" class="m-0"> Name min length is 3 </p>
+    <p *ngIf="registerForm.get('name')?.getError('maxlength')|json" class="m-0"> Name max length is 10 </p>
+    <p *ngIf="registerForm.get('name')?.getError('required')|json" class="m-0"> Name is required </p>
+</div>
+        <label for="email">email</label>
+        <input formControlName="email" type="text" class="form-control mb-2" id="name">
+        <div *ngIf="registerForm.get('email')?.errors &&registerForm.get('email')?.touched " class="alert alert-danger">
+            <p *ngIf="registerForm.get('email')?.getError('minlength')|json" class="m-0"> email min length is 3 </p>
+            <p *ngIf="registerForm.get('email')?.getError('maxlength')|json" class="m-0"> email max length is 10 </p>
+            <p *ngIf="registerForm.get('email')?.getError('required')|json" class="m-0"> email is required </p>
+        </div>
+        
+      
+        
+        <label for="password">password</label>
+        <input formControlName="password" type="text" class="form-control mb-2" id="name">
+        <div *ngIf="registerForm.get('password')?.errors &&registerForm.get('password')?.touched " class="alert alert-danger">
+            <p *ngIf="registerForm.get('password')?.getError('pattern')|json" class="m-0"> password pattern is 3 </p>
+            <p *ngIf="registerForm.get('password')?.getError('maxlength')|json" class="m-0"> password max length is 10 </p>
+            <p *ngIf="registerForm.get('password')?.getError('required')|json" class="m-0"> password is required </p>
+        </div>
+        
+        
+        <label for="rePassword">rePassword</label>
+        <input formControlName="rePassword" type="text" class="form-control mb-2" id="name">
+        <div *ngIf="registerForm.get('rePassword')?.touched&&registerForm.get('rePassword')?.getError('passwordmatch')" class="alert alert-danger">
+      
+        <p  class="m-0"> not matching</p>
+    </div>
+       
+
+
+        <label for="phone">phone</label>
+        <input formControlName="phone" type="text" class="form-control mb-2" id="name">
+        <div *ngIf="registerForm.get('phone')?.errors &&registerForm.get('phone')?.touched " class="alert alert-danger">
+            <p *ngIf="registerForm.get('phone')?.getError('pattern')|json" class="m-0"> phone pattern is 3 </p>
+            <p *ngIf="registerForm.get('phone')?.getError('maxlength')|json" class="m-0"> phone max length is 10 </p>
+            <p *ngIf="registerForm.get('phone')?.getError('required')|json" class="m-0"> phone is required </p>
+        </div>
+
+
+<button [disabled]="registerForm.invalid" type="submit" class="btn btn-info" >
+    <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+    <span *ngIf="!isLoading">Register</span>
+</button>
+
+    </form>
+</div>

@@ -1,0 +1,35 @@
+<div class="w-75 mx-auto py-4">
+    <h4>register now</h4>
+    <div *ngIf="apiError" class="alert alert-danger">
+        {{apiError}}
+    </div>
+    <form (ngSubmit)="handleLogin(loginForm)" [formGroup]="loginForm" action="">
+     <h2>{{loginForm.get('name')?.getError('minlength')|json}}</h2>
+   
+        <label for="email">email</label>
+        <input formControlName="email" type="text" class="form-control mb-2" id="name">
+        <div *ngIf="loginForm.get('email')?.errors &&loginForm.get('email')?.touched " class="alert alert-danger">
+            <p *ngIf="loginForm.get('email')?.getError('minlength')|json" class="m-0"> email min length is 3 </p>
+            <p *ngIf="loginForm.get('email')?.getError('maxlength')|json" class="m-0"> email max length is 10 </p>
+            <p *ngIf="loginForm.get('email')?.getError('required')|json" class="m-0"> email is required </p>
+        </div>
+        
+      
+        
+        <label for="password">password</label>
+        <input formControlName="password" type="text" class="form-control mb-2" id="name">
+        <div *ngIf="loginForm.get('password')?.errors &&loginForm.get('password')?.touched " class="alert alert-danger">
+            <p *ngIf="loginForm.get('password')?.getError('pattern')|json" class="m-0"> password pattern is 3 </p>
+            <p *ngIf="loginForm.get('password')?.getError('maxlength')|json" class="m-0"> password max length is 10 </p>
+            <p *ngIf="loginForm.get('password')?.getError('required')|json" class="m-0"> password is required </p>
+        </div>
+        
+        
+      
+<button [disabled]="loginForm.invalid" type="submit" class="btn btn-info" >
+    <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+    <span *ngIf="!isLoading">Register</span>
+</button>
+
+    </form>
+</div>
